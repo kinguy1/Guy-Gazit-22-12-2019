@@ -1,0 +1,9 @@
+<div class="row top-buffer d-flex justify-content-center">
+    <div class="col-md-2 col-md-offset-1 border text-center" *ngFor="let favorite of weatherService.favorits$ | async">
+        <a (click)="weatherService.currentCity=favorite" routerLink="" routerLinkActive="active">
+            <p>{{favorite.name}}</p>
+            <p>{{favorite.currentTemperature}}</p>
+            <p>{{favorite.currentWeatherDesc}}</p>
+        </a>
+    </div>
+</div>

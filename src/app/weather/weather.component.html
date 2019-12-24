@@ -1,0 +1,37 @@
+<ngb-alert *ngIf="!backEndIdle" [dismissible]="false">
+    The API is not active now. come back later.
+</ngb-alert>
+<div *ngIf="backEndIdle" class="container">
+    <div class="row top-buffer d-flex justify-content-center">
+        <div class="col-md-3">
+            <input placeholder="search" id="typeahead-basic" type="search" class="form-control" [resultFormatter]="resultFormatCityListValue" [inputFormatter]="inputFormatCityListValue" [(ngModel)]="model" (change)="cityChange()" [ngbTypeahead]="search" />
+        </div>
+    </div>
+    <div class="border top-buffer container">
+        <div class="row top-buffer">
+            <div class="col-md-6">
+                <p>{{currentCity.name}}</p>
+                <p>{{currentCity.currentTemperature}}</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <fa-icon [icon]="faHeart" [ngClass]="{'red': currentCity.isFavorite}"></fa-icon>&nbsp;
+                <button (click)="toggleFavorite()">
+                    <span *ngIf="!currentCity.isFavorite">Add to</span>
+                    <span *ngIf="currentCity.isFavorite">Remove from</span>
+                    favorites</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-right">
+                <h3>{{currentCity.currentWeatherDesc}}</h3>
+            </div>
+        </div>
+        <div class="row top-buffer d-flex justify-content-center">
+            <div class="col-sm border text-center" *ngFor="let day of currentCity.fiveDaysForecast">
+                <p>{{day.day}}</p>
+                <p>{{day.temperature}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
